@@ -1,0 +1,47 @@
+module.exports = {
+  prefix: '',
+  important: false,
+  separator: ':',
+  theme: {
+    extend: {
+      colors: {
+        asideBg: '#f2f4f5',
+        mainBg: '#ebedef',
+        loginBg: '#ecf1f4',
+        borderColor: '#b9c7d0',
+        textColor: '#002033',
+        linkColor: '#0078d2',
+        grayColor: '#9facb2',
+        greenColor: '#38b37b',
+        redColor: '#eb5757',
+        lightgreyTextColor: '#919fa7',
+        darkgreyTextColor: '#617581',
+        blueColor: '#0082cc',
+        errorColor: '#eb3334',
+      },
+      fontSize: {
+        10: '10px',
+        11: '11px',
+        12: '12px',
+        13: '13px',
+        14: '14px',
+        15: '15px',
+        16: '16px',
+        17: '17px',
+        18: '18px',
+        19: '19px',
+        20: '20px',
+        21: '21px',
+        22: '22px',
+        23: '23px',
+        24: '24px',
+      },
+      screens: {
+        basic: '1024px',
+      },
+      minWidth: {
+        basic: '1024px',
+      },
+    },
+  },
+}
