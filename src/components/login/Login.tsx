@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import store from '../../store/store'
 import basicAuth from '../../auth/auth'
-import GPNLogo from '../../assets/images/gpn-logo.png'
 
 class Login extends PureComponent {
   state = {
@@ -34,13 +33,10 @@ class Login extends PureComponent {
     return (
       <div className="gpna-login">
         <div className="gpna-login-content">
-          <div className="gpna-login-img">
-            <img src={GPNLogo} alt="GPN Logo" />
-          </div>
           <form className="gpna-login-form" onSubmit={this.handleSubmit}>
             <div className="gpna-login-name">
               <div className="gpna-login-title">Вход в систему</div>
-              <div className="gpna-login-title">Интеллектуальные схемы</div>
+              <div className="gpna-login-title">Шахматы</div>
             </div>
             <div className="gpna-login-input">
               <div className="gpna-login-subtitle">Имя пользователя</div>

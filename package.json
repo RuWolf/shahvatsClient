@@ -2,13 +2,17 @@
   "name": "shahvatsclient",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "build:css": "postcss src/styles/main.css -o src/index.css",
     "watch:css": "postcss src/styles/main.css -o src/index.css -w",
     "start": "npm-run-all -p watch:css start-js",
     "start-js": "react-scripts start",
+    "build-js": "react-scripts build",
+    "build": "cross-env NODE_ENV=production npm-run-all build:css build-js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "commit-all": "git add . && git cz",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "changelog": "./node_modules/.bin/conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
@@ -66,5 +70,22 @@
   "bugs": {
     "url": "https://github.com/RuWolf/shahvatsClient/issues"
   },
-  "homepage": "https://github.com/RuWolf/shahvatsClient#readme"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "proxy": "http://localhost:3000"
 }

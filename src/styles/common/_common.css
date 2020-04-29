@@ -1,0 +1,13 @@
+html,
+body {
+  @apply .overflow-hidden;
+  @apply .text-textColor;
+}
+
+#root {
+  @apply .h-screen .flex .flex-col;
+}
+
+button {
+  outline: none !important;
+}

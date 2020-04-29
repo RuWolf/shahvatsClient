@@ -1,0 +1,66 @@
+.gpna-login {
+  @apply .flex .flex-grow .bg-loginBg .h-full .justify-center;
+}
+
+.gpna-login-content {
+  @apply .flex .items-center .justify-center .flex-col;
+  width: 364px;
+}
+
+.gpna-login-img {
+  @apply .p-12;
+}
+
+.gpna-login-form {
+  @apply .flex .flex-col;
+  @apply .bg-white .p-6 .rounded-lg .shadow-2xl;
+}
+
+.gpna-login-name {
+  @apply .p-4 .py-6;
+}
+
+.gpna-login-title {
+  @apply .text-center .text-20 .font-bold;
+}
+
+.gpna-login-subtitle {
+  @apply .text-14 .text-lightgreyTextColor;
+}
+
+.gpna-login-input {
+  @apply .relative .p-2 ;
+}
+
+.gpna-login-input-name {
+  @apply .p-1 .w-full .text-16 .border .border-lightgreyTextColor .rounded;
+}
+
+.gpna-login-input-wrong {
+  @apply .p-1 .w-full .text-16 .border .border-errorColor .rounded;
+}
+
+.gpna-login-input-pass {
+  @apply .p-1 .w-full .text-16 .border .border-lightgreyTextColor .rounded;
+}
+
+.gpna-login-button {
+  @apply .p-2 .m-2 .my-4 .text-18 .bg-blueColor .rounded .text-white;
+}
+
+.gpna-login-wrong {
+  @apply .absolute .p-2 .rounded .text-white .text-11 .bg-redColor .opacity-75 .shadow-lg;
+  width: fit-content;
+  left: 300px;
+  top: 30px;
+
+  &::after {
+    @apply .absolute .w-0 .h-0;
+    content: '';
+    top: 9px;
+    left: -8px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 8px solid #eb5757;
+  }
+}
