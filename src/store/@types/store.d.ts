@@ -23,7 +23,7 @@ export interface StoreAppConfig {
   }
   token: string
   color: string,
-  positions: [],
+  positions: {},
   retired: [null]
 
 }

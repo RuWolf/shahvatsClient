@@ -22,6 +22,18 @@ export const party: StoreonModule<StoreAppConfig> = (store) => {
     }
   })
 
+  store.on('changePosition', (state, [address, value]) => {
+    console.log(address)
+    console.log(value)
+    return {
+      ...state,
+      positions: {
+        ...state.positions,
+        [address]: value,
+      }
+    }
+  })
+
   // store.on('addRetired', ({retired}, newRetired) => {
   //   return {
   //     retired.push(newRetired)

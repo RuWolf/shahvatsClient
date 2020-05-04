@@ -1,4 +1,5 @@
-import React, {PureComponent} from 'react';
+import React, {FunctionComponent, useState} from 'react';
+import {useStoreon} from 'storeon/react'
 import store from '../../store/store'
 
 const whiteKing = require('../../images/white-king.png');
@@ -15,11 +16,15 @@ const blackHorse = require('../../images/black-horse.png');
 const blackElephant = require('../../images/black-elephant.png');
 const blackPawn = require('../../images/black-pawn.png');
 
-class ShahvatsDashboard extends PureComponent {
+const ShahvatsDashboard: FunctionComponent<{ initial?: number }> = ({initial = 0}) => {
 
-  state = {
-    activeFigure: null,
-    activeAddress: null,
+  const {positions} = useStoreon('positions')
+  const {color} = useStoreon('color')
+
+  const [activeFigure, setActiveFigure] = useState();
+  const [activeAddress, setActiveAddress] = useState();
+
+  const testPosition = {
     a8: blackElephant,
     b8: blackHorse,
     c8: blackOfficer,
@@ -86,33 +91,37 @@ class ShahvatsDashboard extends PureComponent {
     h1: whiteElephant,
   }
 
-  clickField = (event) => {
-
-    const color = JSON.parse(localStorage.getItem('storeon')).color
-
-    if (!this.state.activeFigure) {
+  const clickField = (event) => {
+    // store.dispatch('initColor', 'white')
+    // store.dispatch('initPosition', testPosition)
+    if (!activeFigure) {
       try {
-        let colorFigure = this.state[event.target.alt].substr(14, 5);
+        let colorFigure = positions[event.target.alt].substr(14, 5);
+        // console.log('colorF', colorFigure, color)
         if (colorFigure === color) {
+          console.log('Alt', event.target.alt)
           event.target.classList.add('active-square');
-          this.setState({activeFigure: this.state[event.target.alt]});
-          this.setState({activeAddress: event.target.alt})
+          setActiveFigure(positions[event.target.alt])
+          setActiveAddress(event.target.alt)
         }
       } catch (e) {
         console.log('клик не по белой фигуре')
       }
 
     } else {
-      document.querySelector(`#${this.state.activeAddress}`).classList.remove('active-square');
-      this.setState({[this.state.activeAddress]: null})
+      console.log('activAdd', activeAddress)
+      document.querySelector(`#${activeAddress}`).classList.remove('active-square');
+      store.dispatch('changePosition', [activeAddress, ''])
+      // this.setState({[activeAddress]: null})
       let address = event.target.id || event.target.alt
-      this.setState({[address]: this.state.activeFigure})
-      this.setState({activeAddress: null})
-      this.setState({activeFigure: null});
+      store.dispatch('changePosition', [address, activeFigure])
+      // this.setState({[address]: activeFigure})
+      setActiveFigure(null)
+      setActiveAddress(null)
     }
   };
 
-  showField = (color) => {
+  const showField = (color) => {
     let result = [];
     let arrayField = [
       ['a8', 'white-field'],
@@ -185,20 +194,20 @@ class ShahvatsDashboard extends PureComponent {
       for (let i = 0; i < 64; i = i + 8) {
         let row = [];
         for (let j = i; j < i + 8; j++) {
-          if (this.state[arrayField[j][0]]) {
+          if (positions[arrayField[j][0]]) {
             row.push(
               <div key={arrayField[j][0]}
                    id={arrayField[j][0]}
                    className={arrayField[j][1]}
-                   onClick={this.clickField}>
-                <img src={this.state[arrayField[j][0]]} alt={arrayField[j][0]}/>
+                   onClick={clickField}>
+                <img src={positions[arrayField[j][0]]} alt={arrayField[j][0]}/>
               </div>)
           } else {
             row.push(
               <div key={arrayField[j][0]}
                    id={arrayField[j][0]}
                    className={arrayField[j][1]}
-                   onClick={this.clickField}>
+                   onClick={clickField}>
               </div>)
           }
         }
@@ -240,14 +249,14 @@ class ShahvatsDashboard extends PureComponent {
     return result;
   };
 
-  render() {
-    store.dispatch('initColor', 'white')
-    return (
-      <div className="shahvats-dashboard">
-        {this.showField('white')}
-      </div>
-    );
-  }
+
+  return (
+
+    <div className="shahvats-dashboard">
+      {showField(color)}
+    </div>
+  );
+
 }
 
 export default ShahvatsDashboard;
